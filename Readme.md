@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Иван Питенин](https://up.htmlacademy.ru/javascript/12/user/246656).
-* Наставник: [Екатерина Кащенко].
+* Наставник: [Екатерина Кащенко](https://htmlacademy.ru/profile/id109008).
 
 ---
 
