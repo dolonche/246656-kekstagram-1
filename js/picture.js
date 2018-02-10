@@ -1,4 +1,6 @@
 'use strict';
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 var gallery = document.querySelector('.gallery-overlay');
 var picturesTemplate = document.querySelector('#picture-template').content;
 var picturesList = document.querySelector('.pictures');
@@ -46,10 +48,58 @@ var renderGalleryItem = function (picture) {
   commentsCount.textContent = picture.comments;
   return galleryElement;
 };
-gallery.classList.remove('hidden');
 createPicturesData();
 for (var i = 0; i < pictures.length; i++) {
   fragment.appendChild(renderPictureElement(pictures[i]));
   renderGalleryItem(pictures[i]);
 }
 picturesList.appendChild(fragment);
+var pictureItem = document.querySelectorAll('.picture');
+var galleryClose = gallery.querySelector('.gallery-overlay-close');
+for (var k = 0; k < pictureItem.length; k++) {
+  (function (index) {
+    pictureItem[k].addEventListener('click', function (event) {
+      event.preventDefault();
+      gallery.classList.remove('hidden');
+      renderGalleryItem(pictures[index]);
+    });
+  })(k);
+}
+var closePopup = function () {
+  gallery.classList.add('hidden');
+};
+galleryClose.addEventListener('click', closePopup);
+galleryClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+});
+var formSelect = document.querySelector('#upload-select-image');
+var uploadFile = formSelect.querySelector('#upload-file');
+var uploadFileWrapper = formSelect.querySelector('.upload-image');
+var formFrame = formSelect.querySelector('.upload-overlay');
+var formFrameCancel = formSelect.querySelector('.upload-form-cancel');
+var formDescr = formSelect.querySelector('.upload-form-description');
+var closeFormFrame = function () {
+  formFrame.classList.add('hidden');
+  uploadFileWrapper.classList.remove('hidden');
+};
+uploadFile.addEventListener('change', function () {
+  uploadFileWrapper.classList.add('hidden');
+  formFrame.classList.remove('hidden');
+});
+formFrameCancel.addEventListener('click', closeFormFrame);
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    if (formDescr === document.activeElement) {
+      formFrame.classList.remove('hidden');
+    } else {
+      closeFormFrame();
+    }
+  }
+});
