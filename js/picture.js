@@ -85,6 +85,7 @@ var uploadFileWrapper = formSelect.querySelector('.upload-image');
 var formFrame = formSelect.querySelector('.upload-overlay');
 var formFrameCancel = formSelect.querySelector('.upload-form-cancel');
 var formDescr = formSelect.querySelector('.upload-form-description');
+var hashtag = formSelect.querySelector('.upload-form-hashtags');
 var closeFormFrame = function () {
   formFrame.classList.add('hidden');
   uploadFileWrapper.classList.remove('hidden');
@@ -103,3 +104,12 @@ document.addEventListener('keydown', function (evt) {
     }
   }
 });
+formDescr.addEventListener('submit', function () {
+  if (!formDescr.validity.valid) {
+    formDescr.style.borderColor = 'red';
+  }
+  if (!hashtag.validity.valid) {
+    hashtag.style.borderColor = 'red';
+  }
+  formSelect.reset();
+}, true);
