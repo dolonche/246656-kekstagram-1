@@ -9,11 +9,19 @@
   var resizeImage = formSelect.querySelector('.effect-image-preview');
   var resizeControl = formSelect.querySelector('.upload-resize-controls');
   var resizeValue = formSelect.querySelector('.upload-resize-controls-value');
+  var resizeScaleStep = parseInt(25, 10);
   var checkboxContainer = formSelect.querySelector('.upload-effect-controls');
   var hashtag = formSelect.querySelector('.upload-form-hashtags');
   var effectContainer = formSelect.querySelector('.upload-effect-level');
   var effectPin = formSelect.querySelector('.upload-effect-level-pin');
   var effectLevel = formSelect.querySelector('.upload-effect-level-val');
+  var decButton = formSelect.querySelector('.upload-resize-controls-button-dec');
+  var incButton = formSelect.querySelector('.upload-resize-controls-button-inc');
+  var pinBasePos = '20%';
+  var pinMinPos = 1;
+  var pinMaxPos = 456;
+  var formDescrValid = formDescr.validity.valid;
+  var formHastagValid = hashtag.validity.valid;
   var filterValue = function (shift) {
     switch (resizeImage.classList[1]) {
       case 'effect-chrome':
@@ -40,7 +48,7 @@
   uploadFile.addEventListener('change', function () {
     uploadFileWrapper.classList.add('hidden');
     formFrame.classList.remove('hidden');
-  });
+  })
   formFrameCancel.addEventListener('click', closeFormFrame);
   document.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.data.ESC_KEYCODE) {
@@ -55,14 +63,14 @@
     resizeImage.style.transform = 'scale' + '(0.' + parseInt(resizeValue.value, 10) + ')';
   };
   resizeControl.addEventListener('click', function (event) {
-    if (event.target.classList[event.target.classList.length - 1] === 'upload-resize-controls-button-dec') {
-      if (parseInt(resizeValue.value, 10) > parseInt(25, 10)) {
-        resizeValue.value = parseInt(resizeValue.value, 10) - parseInt(25, 10) + '%';
+    if (event.target === decButton) {
+      if (parseInt(resizeValue.value, 10) > resizeScaleStep) {
+        resizeValue.value = parseInt(resizeValue.value, 10) - resizeScaleStep + '%';
         resizeImageValue();
       }
-    } else if (event.target.classList[event.target.classList.length - 1] === 'upload-resize-controls-button-inc') {
+    } else if (event.target === incButton) {
       if (parseInt(resizeValue.value, 10) < parseInt(100, 10)) {
-        resizeValue.value = parseInt(resizeValue.value, 10) + parseInt(25, 10) + '%';
+        resizeValue.value = parseInt(resizeValue.value, 10) + resizeScaleStep + '%';
         resizeImageValue();
         if (parseInt(resizeValue.value, 10) === parseInt(100, 10)) {
           resizeImage.style.transform = 'scale(1)';
@@ -73,8 +81,8 @@
   effectContainer.style.display = 'none';
   checkboxContainer.addEventListener('click', function (event) {
     if (event.target.name === 'effect') {
-      effectPin.style.left = '20%';
-      effectLevel.style.width = '20%';
+      effectPin.style.left = pinBasePos;
+      effectLevel.style.width = pinBasePos;
       var str = event.target.id;
       str = str.substr(7);
       resizeImage.classList.remove(resizeImage.classList[1]);
@@ -91,17 +99,17 @@
     evt.preventDefault();
     var x = evt.clientX;
     var onMouseMove = function (moveEvt) {
-      if (effectPin.offsetLeft <= 456 && effectPin.offsetLeft >= 0) {
+      if (effectPin.offsetLeft <= pinMaxPos && effectPin.offsetLeft >= 0) {
         moveEvt.preventDefault();
         var shiftX = x - moveEvt.clientX;
         x = moveEvt.clientX;
         effectPin.style.left = (effectPin.offsetLeft - shiftX) + 'px';
         effectLevel.style.width = (effectPin.offsetLeft - shiftX) + 'px';
-        if (effectPin.offsetLeft - shiftX >= 456) {
-          effectPin.style.left = 455 + 'px';
+        if (effectPin.offsetLeft - shiftX >= pinMaxPos) {
+          effectPin.style.left = pinMaxPos - 1 + 'px';
         }
         if (effectPin.offsetLeft - shiftX <= 0) {
-          effectPin.style.left = 1 + 'px';
+          effectPin.style.left = pinMinPos + 'px';
         }
         filterValue(effectPin.offsetLeft - shiftX);
       }
@@ -116,11 +124,8 @@
     document.addEventListener('mouseup', onMouseUp);
   });
   formDescr.addEventListener('submit', function () {
-    if (!formDescr.validity.valid) {
+    if (!formDescrValid || !formHastagValid) {
       formDescr.style.borderColor = 'red';
-    }
-    if (!hashtag.validity.valid) {
-      hashtag.style.borderColor = 'red';
     }
     formSelect.reset();
   });

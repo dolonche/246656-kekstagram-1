@@ -4,8 +4,8 @@
   var MAX_LIKES = 200;
   var pictures = [];
   var photoComments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают.Как можно было поймать такой неудачный момент ? !'];
-  var picturesList = document.querySelector('.pictures');
-  var gallery = document.querySelector('.gallery-overlay');
+  var pictureElement = document.querySelector('.pictures');
+  var galleryOverlay = document.querySelector('.gallery-overlay');
   var fragment = document.createDocumentFragment();
   var randomComments = function (commentsArr) {
     var commentsValue = Math.floor(Math.random() * (commentsArr.length));
@@ -15,8 +15,8 @@
     var likesValue = Math.floor(Math.random() * (maxLikes - minLikes)) + minLikes;
     return likesValue;
   };
-  var createPicturesData = function () {
-    for (var i = 0; i <= 25; i++) {
+  var createPicturesData = function (objectValue) {
+    for (var i = 0; i <= objectValue; i++) {
       var photo = {
         url: 'photos/' + i + '.jpg',
         likes: randomLikes(MIN_LIKES, MAX_LIKES),
@@ -26,14 +26,14 @@
     }
     return pictures;
   };
-  var renderPictureElement = function (descrip) {
+  var renderPictureElement = function (description) {
     var pictureElement = window.data.picturesTemplate.cloneNode(true);
     var pictureImg = pictureElement.querySelector('.picture img');
     var pictureComments = pictureElement.querySelector('.picture-comments');
     var pictureLikes = pictureElement.querySelector('.picture-likes');
-    pictureImg.src = descrip.url;
-    pictureComments.textContent = descrip.comments;
-    pictureLikes.textContent = descrip.likes;
+    pictureImg.src = description.url;
+    pictureComments.textContent = description.comments;
+    pictureLikes.textContent = description.likes;
     return pictureElement;
   };
   var renderPictures = function () {
@@ -41,45 +41,34 @@
       fragment.appendChild(renderPictureElement(pictures[i]));
     }
   };
-  createPicturesData();
+  createPicturesData(25);
   renderPictures();
-  picturesList.appendChild(fragment);
+  pictureElement.appendChild(fragment);
   var renderGalleryItem = function (picture) {
     var galleryElement = window.data.picturesTemplate.cloneNode(true);
-    var galleryImage = gallery.querySelector('.gallery-overlay-image');
-    var likesCount = gallery.querySelector('.likes-count');
-    var commentsCount = gallery.querySelector('.comments-count');
+    var galleryImage = galleryOverlay.querySelector('.gallery-overlay-image');
+    var likesCount = galleryOverlay.querySelector('.likes-count');
+    var commentsCount = galleryOverlay.querySelector('.comments-count');
     galleryImage.src = picture.url;
     likesCount.textContent = picture.likes;
     commentsCount.textContent = picture.comments;
     return galleryElement;
   };
   var pictureElement = document.querySelector('.pictures');
-  var galleryClose = gallery.querySelector('.gallery-overlay-close');
-  //  for (var k = 0; k < pictureItem.length; k++) {
-  //    (function (index) {
-  //      pictureItem[k].addEventListener('click', function (event) {
-  //        event.preventDefault();
-  //        gallery.classList.remove('hidden');
-  //        renderGalleryItem(window.data.picData()[index + 1]);
-  //      });
-  //    })(k);
-  //  }
+  var galleryClose = galleryOverlay.querySelector('.gallery-overlay-close');
   pictureElement.addEventListener('click', onClickPicture);
   function onClickPicture(e) {
     e.preventDefault();
     var target = e.target;
     for (var i = 0; i < pictureElement.children.length; i++) {
       if (pictureElement.children[i].querySelector('img') === target) {
-        // gallery.appendChild(renderGalleryItem(pictures[i]));
-        // console.log(window.data.picData()[i + 1]);
-        gallery.classList.remove('hidden');
-        renderGalleryItem(pictures[i + 1]); // при клике получаю обьект, по которому кликнул пользователь, твоя задача - этот обьект передать в функцию, которая рендерит картинку с оверлеем
+        galleryOverlay.classList.remove('hidden');
+        renderGalleryItem(pictures[i + 1]);
       }
     }
   }
   var closePopup = function () {
-    gallery.classList.add('hidden');
+    galleryOverlay.classList.add('hidden');
   };
   galleryClose.addEventListener('click', closePopup);
   galleryClose.addEventListener('keydown', function (evt) {
