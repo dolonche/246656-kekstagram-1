@@ -48,7 +48,7 @@
   uploadFile.addEventListener('change', function () {
     uploadFileWrapper.classList.add('hidden');
     formFrame.classList.remove('hidden');
-  })
+  });
   formFrameCancel.addEventListener('click', closeFormFrame);
   document.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.data.ESC_KEYCODE) {

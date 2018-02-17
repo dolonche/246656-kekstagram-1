@@ -27,14 +27,14 @@
     return pictures;
   };
   var renderPictureElement = function (description) {
-    var pictureElement = window.data.picturesTemplate.cloneNode(true);
-    var pictureImg = pictureElement.querySelector('.picture img');
-    var pictureComments = pictureElement.querySelector('.picture-comments');
-    var pictureLikes = pictureElement.querySelector('.picture-likes');
+    var pictureTemplate = window.data.picturesTemplate.cloneNode(true);
+    var pictureImg = pictureTemplate.querySelector('.picture img');
+    var pictureComments = pictureTemplate.querySelector('.picture-comments');
+    var pictureLikes = pictureTemplate.querySelector('.picture-likes');
     pictureImg.src = description.url;
     pictureComments.textContent = description.comments;
     pictureLikes.textContent = description.likes;
-    return pictureElement;
+    return pictureTemplate;
   };
   var renderPictures = function () {
     for (var i = 1; i < pictures.length; i++) {
@@ -45,16 +45,15 @@
   renderPictures();
   pictureElement.appendChild(fragment);
   var renderGalleryItem = function (picture) {
-    var galleryElement = window.data.picturesTemplate.cloneNode(true);
+    var galleryTemplate = window.data.picturesTemplate.cloneNode(true);
     var galleryImage = galleryOverlay.querySelector('.gallery-overlay-image');
     var likesCount = galleryOverlay.querySelector('.likes-count');
     var commentsCount = galleryOverlay.querySelector('.comments-count');
     galleryImage.src = picture.url;
     likesCount.textContent = picture.likes;
     commentsCount.textContent = picture.comments;
-    return galleryElement;
+    return galleryTemplate;
   };
-  var pictureElement = document.querySelector('.pictures');
   var galleryClose = galleryOverlay.querySelector('.gallery-overlay-close');
   pictureElement.addEventListener('click', onClickPicture);
   function onClickPicture(e) {
