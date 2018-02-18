@@ -70,13 +70,13 @@
     galleryOverlay.classList.add('hidden');
   };
   galleryClose.addEventListener('click', closePopup);
-  galleryClose.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.data.ENTER_KEYCODE) {
+  galleryClose.addEventListener('keydown', function (e) {
+    if (e.keyCode === window.data.ENTER_KEYCODE) {
       closePopup();
     }
   });
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.data.ESC_KEYCODE) {
+  document.addEventListener('keydown', function (e) {
+    if (e.keyCode === window.data.ESC_KEYCODE) {
       closePopup();
     }
   });
