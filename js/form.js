@@ -2,7 +2,6 @@
 (function () {
   var formSelect = document.querySelector('#upload-select-image');
   var uploadFile = formSelect.querySelector('#upload-file');
-  var uploadFileWrapper = formSelect.querySelector('.upload-image');
   var formFrame = formSelect.querySelector('.upload-overlay');
   var formFrameCancel = formSelect.querySelector('.upload-form-cancel');
   var formDescr = formSelect.querySelector('.upload-form-description');
@@ -43,10 +42,8 @@
   };
   var closeFormFrame = function () {
     formFrame.classList.add('hidden');
-    uploadFileWrapper.classList.remove('hidden');
   };
   uploadFile.addEventListener('change', function () {
-    uploadFileWrapper.classList.add('hidden');
     formFrame.classList.remove('hidden');
   });
   formFrameCancel.addEventListener('click', closeFormFrame);
@@ -120,14 +117,25 @@
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
-
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
-  formDescr.addEventListener('submit', function () {
+  formSelect.addEventListener('submit', function () {
     if (!formDescrValid || !formHastagValid) {
       formDescr.style.borderColor = 'red';
     }
     formSelect.reset();
+  });
+  var errorHandler = function (errorMessage) {
+    var errorOverlay = document.querySelector('.error-overlay');
+    errorOverlay.textContent = errorMessage;
+    errorOverlay.style.display = 'block';
+  };
+  formSelect.addEventListener('submit', function (e) {
+    window.upload(new FormData(formSelect), function () {
+      formFrame.classList.add('hidden');
+      formSelect.reset();
+    }, errorHandler);
+    e.preventDefault();
   });
 })();
