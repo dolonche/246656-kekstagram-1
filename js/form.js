@@ -123,6 +123,7 @@
   formSelect.addEventListener('submit', function () {
     if (!formDescrValid || !formHastagValid) {
       formDescr.style.borderColor = 'red';
+      event.preventDefault;
     }
     formSelect.reset();
   });
