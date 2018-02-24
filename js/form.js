@@ -10,7 +10,6 @@
   var resizeValue = formSelect.querySelector('.upload-resize-controls-value');
   var resizeScaleStep = parseInt(25, 10);
   var checkboxContainer = formSelect.querySelector('.upload-effect-controls');
-  var hashtag = formSelect.querySelector('.upload-form-hashtags');
   var effectContainer = formSelect.querySelector('.upload-effect-level');
   var effectPin = formSelect.querySelector('.upload-effect-level-pin');
   var effectLevel = formSelect.querySelector('.upload-effect-level-val');
@@ -19,8 +18,6 @@
   var pinBasePos = '20%';
   var pinMinPos = 1;
   var pinMaxPos = 456;
-  var formDescrValid = formDescr.validity.valid;
-  var formHastagValid = hashtag.validity.valid;
   var filterValue = function (shift) {
     switch (resizeImage.classList[1]) {
       case 'effect-chrome':
@@ -119,24 +116,5 @@
     };
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-  });
-  formSelect.addEventListener('submit', function () {
-    if (!formDescrValid || !formHastagValid) {
-      formDescr.style.borderColor = 'red';
-      event.preventDefault;
-    }
-    formSelect.reset();
-  });
-  var errorHandler = function (errorMessage) {
-    var errorOverlay = document.querySelector('.error-overlay');
-    errorOverlay.textContent = errorMessage;
-    errorOverlay.style.display = 'block';
-  };
-  formSelect.addEventListener('submit', function (e) {
-    window.upload(new FormData(formSelect), function () {
-      formFrame.classList.add('hidden');
-      formSelect.reset();
-    }, errorHandler);
-    e.preventDefault();
   });
 })();

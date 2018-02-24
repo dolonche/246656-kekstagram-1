@@ -40,12 +40,7 @@
       }
     }
   };
-  var errorHandler = function (errorMessage) {
-    var errorOverlay = document.querySelector('.error-overlay');
-    errorOverlay.textContent = errorMessage;
-    errorOverlay.style.display = 'block';
-  };
-  window.load(successHandler, errorHandler);
+  window.backend.load(successHandler, window.backend.errorHandler);
   var galleryClose = galleryOverlay.querySelector('.gallery-overlay-close');
   var closePopup = function () {
     galleryOverlay.classList.add('hidden');
