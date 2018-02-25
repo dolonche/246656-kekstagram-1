@@ -18,22 +18,23 @@
   var pinBasePos = '20%';
   var pinMinPos = 1;
   var pinMaxPos = 456;
+  var filterNumberValue = 456;
   var filterValue = function (shift) {
     switch (resizeImage.classList[1]) {
       case 'effect-chrome':
-        resizeImage.style.filter = 'grayscale(' + ((shift) / 456) + ')';
+        resizeImage.style.filter = 'grayscale(' + ((shift) / filterNumberValue) + ')';
         break;
       case 'effect-sepia':
-        resizeImage.style.filter = 'sepia(' + ((shift) / 456) + ')';
+        resizeImage.style.filter = 'sepia(' + ((shift) / filterNumberValue) + ')';
         break;
       case 'effect-marvin':
-        resizeImage.style.filter = 'invert(' + ((shift) / 4.56) + '%)';
+        resizeImage.style.filter = 'invert(' + ((shift) / (filterNumberValue / 100)) + '%)';
         break;
       case 'effect-phobos':
-        resizeImage.style.filter = 'blur(' + ((shift) / 152) + 'px)';
+        resizeImage.style.filter = 'blur(' + ((shift) / (filterNumberValue / 3)) + 'px)';
         break;
       case 'effect-heat':
-        resizeImage.style.filter = 'brightness(' + ((shift) / 152) + ')';
+        resizeImage.style.filter = 'brightness(' + ((shift) / (filterNumberValue / 3)) + ')';
         break;
     }
   };
