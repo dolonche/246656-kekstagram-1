@@ -130,31 +130,31 @@ body {
 .upload-effect-label-chrome .upload-effect-preview,
 .effect-chrome {
   -webkit-filter: grayscale(1);
-          filter: grayscale(1);
+  filter: grayscale(1);
 }
 
 .upload-effect-label-sepia .upload-effect-preview,
 .effect-sepia {
   -webkit-filter: sepia(1);
-          filter: sepia(1);
+  filter: sepia(1);
 }
 
 .upload-effect-label-marvin .upload-effect-preview,
 .effect-marvin {
   -webkit-filter: invert(100%);
-          filter: invert(100%);
+  filter: invert(100%);
 }
 
 .upload-effect-label-phobos .upload-effect-preview,
 .effect-phobos {
   -webkit-filter: blur(5px);
-          filter: blur(5px);
+  filter: blur(5px);
 }
 
 .upload-effect-label-heat .upload-effect-preview,
 .effect-heat {
   -webkit-filter: brightness(3);
-          filter: brightness(3);
+  filter: brightness(3);
 }
 
 .upload-effect-level-value {
@@ -238,6 +238,7 @@ body {
 }
 
 /* Кадрирование */
+
 .upload-resize-controls {
   position: absolute;
   top: 0;
@@ -287,6 +288,7 @@ body {
 }
 
 /* Эффекты */
+
 .upload-effect-controls {
   position: relative;
 
@@ -335,6 +337,7 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 }
 
 /* Превью */
+
 .upload-effect-preview {
   display: block;
   width: 70px;
@@ -349,6 +352,7 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 }
 
 /* Слайдер. Регулировка глубины фильтра */
+
 .upload-effect-level {
   position: absolute;
   top: -60px;
@@ -399,6 +403,7 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 }
 
 /* Хэш-теги */
+
 .upload-form-hashtags {
   display: block;
   width: 470px;
@@ -416,6 +421,7 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 }
 
 /* Описание */
+
 .upload-form-description {
   display: block;
   width: 470px;
@@ -434,6 +440,7 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 }
 
 /* Кнопка отправки */
+
 .upload-form-submit {
   margin-bottom: 30px;
   padding: 0 20px;
@@ -461,6 +468,7 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 }
 
 /* Сообщение об ошибке */
+
 .upload-message {
   position: absolute;
   top: 0;
@@ -643,7 +651,7 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
     width: 1380px;
   }
 
-  .picture:nth-of-type(2n-1):nth-of-type(-n+6) {
+  .picture:nth-of-type(2n-1):nth-of-type(-n + 6) {
     margin-right: 12px;
   }
 
@@ -868,4 +876,17 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 
 .footer-social-item-vk {
   background-position: -84px 0;
+}
+
+.error-overlay {
+  display: none;
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  color: #fff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: crimson;
 }

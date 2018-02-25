@@ -2,7 +2,6 @@
 (function () {
   var formSelect = document.querySelector('#upload-select-image');
   var uploadFile = formSelect.querySelector('#upload-file');
-  var uploadFileWrapper = formSelect.querySelector('.upload-image');
   var formFrame = formSelect.querySelector('.upload-overlay');
   var formFrameCancel = formSelect.querySelector('.upload-form-cancel');
   var formDescr = formSelect.querySelector('.upload-form-description');
@@ -11,7 +10,6 @@
   var resizeValue = formSelect.querySelector('.upload-resize-controls-value');
   var resizeScaleStep = parseInt(25, 10);
   var checkboxContainer = formSelect.querySelector('.upload-effect-controls');
-  var hashtag = formSelect.querySelector('.upload-form-hashtags');
   var effectContainer = formSelect.querySelector('.upload-effect-level');
   var effectPin = formSelect.querySelector('.upload-effect-level-pin');
   var effectLevel = formSelect.querySelector('.upload-effect-level-val');
@@ -20,33 +18,30 @@
   var pinBasePos = '20%';
   var pinMinPos = 1;
   var pinMaxPos = 456;
-  var formDescrValid = formDescr.validity.valid;
-  var formHastagValid = hashtag.validity.valid;
+  var filterNumberValue = 456;
   var filterValue = function (shift) {
     switch (resizeImage.classList[1]) {
       case 'effect-chrome':
-        resizeImage.style.filter = 'grayscale(' + ((shift) / 456) + ')';
+        resizeImage.style.filter = 'grayscale(' + ((shift) / filterNumberValue) + ')';
         break;
       case 'effect-sepia':
-        resizeImage.style.filter = 'sepia(' + ((shift) / 456) + ')';
+        resizeImage.style.filter = 'sepia(' + ((shift) / filterNumberValue) + ')';
         break;
       case 'effect-marvin':
-        resizeImage.style.filter = 'invert(' + ((shift) / 4.56) + '%)';
+        resizeImage.style.filter = 'invert(' + ((shift) / (filterNumberValue / 100)) + '%)';
         break;
       case 'effect-phobos':
-        resizeImage.style.filter = 'blur(' + ((shift) / 152) + 'px)';
+        resizeImage.style.filter = 'blur(' + ((shift) / (filterNumberValue / 3)) + 'px)';
         break;
       case 'effect-heat':
-        resizeImage.style.filter = 'brightness(' + ((shift) / 152) + ')';
+        resizeImage.style.filter = 'brightness(' + ((shift) / (filterNumberValue / 3)) + ')';
         break;
     }
   };
   var closeFormFrame = function () {
     formFrame.classList.add('hidden');
-    uploadFileWrapper.classList.remove('hidden');
   };
   uploadFile.addEventListener('change', function () {
-    uploadFileWrapper.classList.add('hidden');
     formFrame.classList.remove('hidden');
   });
   formFrameCancel.addEventListener('click', closeFormFrame);
@@ -120,14 +115,7 @@
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
-
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-  });
-  formDescr.addEventListener('submit', function () {
-    if (!formDescrValid || !formHastagValid) {
-      formDescr.style.borderColor = 'red';
-    }
-    formSelect.reset();
   });
 })();
