@@ -28,7 +28,6 @@
         resizeImage.style.filter = 'sepia(' + ((shift) / filterNumberValue) + ')';
         break;
       case 'effect-marvin':
-        resizeImage.style.filter = 'invert(' + ((shift) / (filterNumberValue / 100)) + '%)';
         break;
       case 'effect-phobos':
         resizeImage.style.filter = 'blur(' + ((shift) / (filterNumberValue / 3)) + 'px)';

@@ -6,9 +6,11 @@
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
       xhr.addEventListener('load', function () {
-        var successLoadData = onLoad(xhr.response);
-        var errorLoadData = onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
-        return (xhr.status === 200) ? successLoadData : errorLoadData;
+        if (xhr.status === 200) {
+          onLoad(xhr.response);
+        } else {
+          onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+        }
       });
       xhr.addEventListener('error', function () {
         onError('Произошла ошибка соединения');
