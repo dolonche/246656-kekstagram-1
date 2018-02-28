@@ -83,11 +83,7 @@
       resizeImage.classList.add(str);
       filterValue(91.2);
     }
-    if (e.target.value === 'none') {
-      effectContainer.style.display = 'none';
-    } else {
-      effectContainer.style.display = 'block';
-    }
+    effectContainer.style.display = (e.target.value === 'none') ? 'none' : 'block';
   }, true);
   effectPin.addEventListener('mousedown', function (e) {
     e.preventDefault();

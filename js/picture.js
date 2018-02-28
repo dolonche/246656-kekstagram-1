@@ -35,7 +35,7 @@
     if (filters.classList.contains('filters-inactive')) {
       filters.classList.remove('filters-inactive');
     }
-    function onClickPicture(e) {
+    var onClickPicture = function (e) {
       e.preventDefault();
       var target = e.target;
       for (var k = 0; k < pictureElement.children.length; k++) {
@@ -44,7 +44,7 @@
           renderGalleryItem(pictures[k]);
         }
       }
-    }
+    };
   };
   window.backend.load(successHandler, window.backend.errorHandler);
   var picturesNew = [];
@@ -95,9 +95,9 @@
       successHandler(copyData);
     });
   };
-  for (var i = 0; i < filtersButton.length; i++) {
-    filtersButton[i].addEventListener('click', onButtonSortClick);
-  }
+  filtersButton.forEach(function (item, i, arr) {
+    arr[i].addEventListener('click', onButtonSortClick);
+  });
   var galleryClose = galleryOverlay.querySelector('.gallery-overlay-close');
   var closePopup = function () {
     galleryOverlay.classList.add('hidden');
