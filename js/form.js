@@ -28,7 +28,6 @@
         resizeImage.style.filter = 'sepia(' + ((shift) / filterNumberValue) + ')';
         break;
       case 'effect-marvin':
-        resizeImage.style.filter = 'invert(' + ((shift) / (filterNumberValue / 100)) + '%)';
         break;
       case 'effect-phobos':
         resizeImage.style.filter = 'blur(' + ((shift) / (filterNumberValue / 3)) + 'px)';
@@ -84,11 +83,7 @@
       resizeImage.classList.add(str);
       filterValue(91.2);
     }
-    if (e.target.value === 'none') {
-      effectContainer.style.display = 'none';
-    } else {
-      effectContainer.style.display = 'block';
-    }
+    effectContainer.style.display = (e.target.value === 'none') ? 'none' : 'block';
   }, true);
   effectPin.addEventListener('mousedown', function (e) {
     e.preventDefault();
