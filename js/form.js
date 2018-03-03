@@ -1,5 +1,9 @@
 'use strict';
 (function () {
+  var PIN_BASE_POS = '100%';
+  var PIN_MIN_POS = 1;
+  var PIN_MAX_POS = 456;
+  var FILTER_NUMBER_VALUE = 456;
   var formSelect = document.querySelector('#upload-select-image');
   var uploadFile = formSelect.querySelector('#upload-file');
   var formFrame = formSelect.querySelector('.upload-overlay');
@@ -15,25 +19,25 @@
   var effectLevel = formSelect.querySelector('.upload-effect-level-val');
   var decButton = formSelect.querySelector('.upload-resize-controls-button-dec');
   var incButton = formSelect.querySelector('.upload-resize-controls-button-inc');
-  var pinBasePos = '20%';
-  var pinMinPos = 1;
-  var pinMaxPos = 456;
-  var filterNumberValue = 456;
   var filterValue = function (shift) {
     switch (resizeImage.classList[1]) {
+      case 'effect-none':
+        resizeImage.style.filter = '';
+        break;
       case 'effect-chrome':
-        resizeImage.style.filter = 'grayscale(' + ((shift) / filterNumberValue) + ')';
+        resizeImage.style.filter = 'grayscale(' + ((shift) / FILTER_NUMBER_VALUE) + ')';
         break;
       case 'effect-sepia':
-        resizeImage.style.filter = 'sepia(' + ((shift) / filterNumberValue) + ')';
+        resizeImage.style.filter = 'sepia(' + ((shift) / FILTER_NUMBER_VALUE) + ')';
         break;
       case 'effect-marvin':
+        resizeImage.style.filter = 'invert(' + ((shift) / 4.56) + '%)';
         break;
       case 'effect-phobos':
-        resizeImage.style.filter = 'blur(' + ((shift) / (filterNumberValue / 3)) + 'px)';
+        resizeImage.style.filter = 'blur(' + ((shift) / (FILTER_NUMBER_VALUE / 3)) + 'px)';
         break;
       case 'effect-heat':
-        resizeImage.style.filter = 'brightness(' + ((shift) / (filterNumberValue / 3)) + ')';
+        resizeImage.style.filter = 'brightness(' + ((shift) / (FILTER_NUMBER_VALUE / 3)) + ')';
         break;
     }
   };
@@ -44,8 +48,8 @@
     formFrame.classList.remove('hidden');
   });
   formFrameCancel.addEventListener('click', closeFormFrame);
-  document.addEventListener('keydown', function (e) {
-    if (e.keyCode === window.data.ESC_KEYCODE) {
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === window.data.ESC_KEYCODE) {
       if (formDescr === document.activeElement) {
         formFrame.classList.remove('hidden');
       } else {
@@ -56,13 +60,13 @@
   var resizeImageValue = function () {
     resizeImage.style.transform = 'scale' + '(0.' + parseInt(resizeValue.value, 10) + ')';
   };
-  resizeControl.addEventListener('click', function (e) {
-    if (e.target === decButton) {
+  resizeControl.addEventListener('click', function (evt) {
+    if (evt.target === decButton) {
       if (parseInt(resizeValue.value, 10) > resizeScaleStep) {
         resizeValue.value = parseInt(resizeValue.value, 10) - resizeScaleStep + '%';
         resizeImageValue();
       }
-    } else if (e.target === incButton) {
+    } else if (evt.target === incButton) {
       if (parseInt(resizeValue.value, 10) < parseInt(100, 10)) {
         resizeValue.value = parseInt(resizeValue.value, 10) + resizeScaleStep + '%';
         resizeImageValue();
@@ -73,40 +77,40 @@
     }
   }, true);
   effectContainer.style.display = 'none';
-  checkboxContainer.addEventListener('click', function (e) {
-    var str = e.target.id;
-    if (e.target.name === 'effect') {
+  checkboxContainer.addEventListener('click', function (evt) {
+    var str = evt.target.id;
+    if (evt.target.name === 'effect') {
       str = str.substr(7);
-      effectPin.style.left = pinBasePos;
-      effectLevel.style.width = pinBasePos;
+      effectPin.style.left = PIN_BASE_POS;
+      effectLevel.style.width = PIN_BASE_POS;
       resizeImage.classList.remove(resizeImage.classList[1]);
       resizeImage.classList.add(str);
-      filterValue(91.2);
+      filterValue(456);
     }
-    effectContainer.style.display = (e.target.value === 'none') ? 'none' : 'block';
+    effectContainer.style.display = (evt.target.value === 'none') ? 'none' : 'block';
   }, true);
-  effectPin.addEventListener('mousedown', function (e) {
-    e.preventDefault();
-    var x = e.clientX;
+  effectPin.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+    var x = evt.clientX;
     var onMouseMove = function (movee) {
       var shiftX = x - movee.clientX;
       var effectPinSetLeft = effectPin.offsetLeft;
-      if (effectPinSetLeft <= pinMaxPos && effectPinSetLeft >= 0) {
+      if (effectPinSetLeft <= PIN_MAX_POS && effectPinSetLeft >= 0) {
         movee.preventDefault();
         x = movee.clientX;
         effectPin.style.left = (effectPinSetLeft - shiftX) + 'px';
         effectLevel.style.width = (effectPinSetLeft - shiftX) + 'px';
-        if (effectPinSetLeft - shiftX >= pinMaxPos) {
-          effectPin.style.left = pinMaxPos - 1 + 'px';
+        if (effectPinSetLeft - shiftX >= PIN_MAX_POS) {
+          effectPin.style.left = PIN_MAX_POS - 1 + 'px';
         }
         if (effectPinSetLeft - shiftX <= 0) {
-          effectPin.style.left = pinMinPos + 'px';
+          effectPin.style.left = PIN_MIN_POS + 'px';
         }
         filterValue(effectPinSetLeft - shiftX);
       }
     };
-    var onMouseUp = function (upe) {
-      upe.preventDefault();
+    var onMouseUp = function (upevt) {
+      upevt.preventDefault();
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
