@@ -8,7 +8,6 @@
   var uploadFile = formSelect.querySelector('#upload-file');
   var formFrame = formSelect.querySelector('.upload-overlay');
   var formFrameCancel = formSelect.querySelector('.upload-form-cancel');
-  var formDescr = formSelect.querySelector('.upload-form-description');
   var resizeImage = formSelect.querySelector('.effect-image-preview');
   var resizeImageClass = resizeImage.classList[1];
   var resizeControl = formSelect.querySelector('.upload-resize-controls');
