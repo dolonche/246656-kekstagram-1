@@ -10,6 +10,7 @@
   var formFrameCancel = formSelect.querySelector('.upload-form-cancel');
   var formDescr = formSelect.querySelector('.upload-form-description');
   var resizeImage = formSelect.querySelector('.effect-image-preview');
+  var resizeImageClass = resizeImage.classList[1];
   var resizeControl = formSelect.querySelector('.upload-resize-controls');
   var resizeValue = formSelect.querySelector('.upload-resize-controls-value');
   var resizeScaleStep = parseInt(25, 10);
@@ -20,7 +21,7 @@
   var decButton = formSelect.querySelector('.upload-resize-controls-button-dec');
   var incButton = formSelect.querySelector('.upload-resize-controls-button-inc');
   var filterValue = function (shift) {
-    switch (resizeImage.classList[1]) {
+    switch (resizeImageClass) {
       case 'effect-none':
         resizeImage.style.filter = '';
         break;
