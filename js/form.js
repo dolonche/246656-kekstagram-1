@@ -51,11 +51,7 @@
   formFrameCancel.addEventListener('click', closeFormFrame);
   document.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.data.ESC_KEYCODE) {
-      if (formDescr === document.activeElement) {
-        formFrame.classList.remove('hidden');
-      } else {
-        closeFormFrame();
-      }
+      closeFormFrame();
     }
   });
   var resizeImageValue = function () {
