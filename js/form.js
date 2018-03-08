@@ -15,7 +15,6 @@
   var resizeScaleStep = parseInt(25, 10);
   var checkboxContainer = formSelect.querySelector('.upload-effect-controls');
   var checkboxItem = formSelect.querySelectorAll('input[name="effect"]');
-  var checkboxEffectNone = formSelect.querySelector('#upload-effect-none');
   var effectContainer = formSelect.querySelector('.upload-effect-level');
   var effectPin = formSelect.querySelector('.upload-effect-level-pin');
   var effectLevel = formSelect.querySelector('.upload-effect-level-val');
@@ -54,7 +53,7 @@
       checkboxItem[i].checked = false;
     }
     checkboxItem[0].checked = true;
-    if (resizeImage.classList[1] != null) {
+    if (resizeImage.classList[1] !== null) {
       resizeImage.classList.remove(resizeImage.classList[1]);
       resizeImage.style.filter = '';
     }
@@ -104,7 +103,7 @@
       var str = [];
       str.length = evt.target.htmlFor.length;
       for (var i = str.length; i >= 0; i--) {
-        if (evt.target.htmlFor[i] == '-') {
+        if (evt.target.htmlFor[i] === '-') {
           str = str.join('');
           str = 'effect-' + str;
           break;

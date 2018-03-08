@@ -27,27 +27,27 @@
     xhr.timeout = SERVER_TIME; // 10s
 
     return xhr;
-  }
+  };
 
   var load = function (onLoad, onError) {
     var xhr = setup(onLoad, onError);
     xhr.open('GET', URL_UPLOAD + '/data');
     xhr.send();
-  }
+  };
 
   var upload = function (data, onLoad, onError) {
     var xhr = setup(onLoad, onError);
     xhr.open('POST', URL_UPLOAD);
     xhr.send(data);
-  }
+  };
 
   var errorHandler = function (errorMessage) {
     var errorOverlay = document.querySelector('.error-overlay');
     errorOverlay.textContent = errorMessage;
     errorOverlay.style.display = 'block';
-  }
+  };
 
-  window.backend  = {
+  window.backend = {
     load: load,
     upload: upload,
     errorHandler: errorHandler
