@@ -26,7 +26,7 @@
 <form class="upload-form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off" action="https://1510.dump.academy/kekstagram">
   <div class="upload-image">
     <input type="file" id="upload-file" class="upload-input" name="filename" required>
-    <label class="upload-file upload-control" for="upload-file"></label>
+    <label class="upload-file upload-control" for="upload-file" tabindex="0"></label>
   </div>
 
   <div class="upload-overlay hidden">
@@ -57,37 +57,37 @@
           </div>
 
           <input type="radio" name="effect" id="upload-effect-none" value="none" checked>
-          <label class="upload-effect-label" for="upload-effect-none">
+          <label class="upload-effect-label" for="upload-effect-none" tabindex="0">
             <div class="upload-effect-preview"></div>
             Оригинал
           </label>
 
           <input type="radio" name="effect" id="upload-effect-chrome" value="chrome">
-          <label class="upload-effect-label upload-effect-label-chrome" for="upload-effect-chrome">
+          <label class="upload-effect-label upload-effect-label-chrome" for="upload-effect-chrome" tabindex="0">
             <div class="upload-effect-preview"></div>
             Хром
           </label>
 
           <input type="radio" name="effect" id="upload-effect-sepia" value="sepia">
-          <label class="upload-effect-label upload-effect-label-sepia" for="upload-effect-sepia">
+          <label class="upload-effect-label upload-effect-label-sepia" for="upload-effect-sepia" tabindex="0">
             <div class="upload-effect-preview"></div>
             Сепия
           </label>
 
           <input type="radio" name="effect" id="upload-effect-marvin" value="marvin">
-          <label class="upload-effect-label upload-effect-label-marvin" for="upload-effect-marvin">
+          <label class="upload-effect-label upload-effect-label-marvin" for="upload-effect-marvin" tabindex="0">
             <div class="upload-effect-preview"></div>
             Марвин
           </label>
 
           <input type="radio" name="effect" id="upload-effect-phobos" value="phobos">
-          <label class="upload-effect-label upload-effect-label-phobos" for="upload-effect-phobos">
+          <label class="upload-effect-label upload-effect-label-phobos" for="upload-effect-phobos" tabindex="0">
             <div class="upload-effect-preview"></div>
             Фобос
           </label>
 
           <input type="radio" name="effect" id="upload-effect-heat" value="heat">
-          <label class="upload-effect-label upload-effect-label-heat" for="upload-effect-heat">
+          <label class="upload-effect-label upload-effect-label-heat" for="upload-effect-heat" tabindex="0">
             <div class="upload-effect-preview"></div>
             Зной
           </label>
@@ -130,7 +130,7 @@
 
 
 <div class="gallery-overlay hidden">
-  <span class="gallery-overlay-close">&times;</span>
+  <span class="gallery-overlay-close" tabindex="100">&times;</span>
   <div class="gallery-overlay-preview">
     <img src="" class="gallery-overlay-image" alt="">
     <div class="gallery-overlay-controls">
@@ -155,5 +155,6 @@
 <script src="js/backend.js"></script>
 <script src="js/picture.js"></script>
 <script src="js/form.js"></script>
+<script src="js/upload.js"></script>
 </body>
 </html>
